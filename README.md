@@ -44,7 +44,7 @@ Ou seja: um usuário pode ter vários pedidos, e um móvel pode aparecer em vár
 
 | Arquivo | Descrição |
 |---------|-----------|
-| `pratica_postgres.sql` | Script principal com criação das tabelas, inserção de dados e 10 consultas comentadas |
+| `pratica_postgres.sql` | Script principal com criação das tabelas, inserção de dados e 5 consultas comentadas |
 | `docker-compose.yml` | Sobe o PostgreSQL e o pgAdmin via Docker |
 | `README.md` | Este arquivo |
 
@@ -118,23 +118,16 @@ Define a estrutura do banco: quais colunas cada tabela tem, seus tipos de dados 
 ### 2. Inserção de Dados (`INSERT INTO`)
 Popula o banco automaticamente com funcionários, móveis e pedidos fictícios — sem precisar digitar nada manualmente.
 
-
-tenho que atualizar essa pirosca
 ### 3. Consultas (`SELECT`)
-São 10 consultas organizadas por nível de complexidade:
+São 5 consultas organizadas por nível de complexidade:
 
-| Consulta | Recursos utilizados |
-|----------|-------------------|
-| A | `INNER JOIN` em 3 tabelas |
-| B | `INNER JOIN` + colunas de tabelas diferentes |
-| C | `GROUP BY` + `COUNT`, `SUM`, `AVG` |
-| D | `GROUP BY` + cálculo de faturamento |
-| E | `GROUP BY` em tabela única |
-| F | `WHERE` com múltiplos filtros |
-| G | `WHERE` cruzando dados de tabelas diferentes |
-| H | `ORDER BY` + `LIMIT` (ranking) |
-| I | `ORDER BY` + `LIMIT` (top usuários) |
-| J | **Tudo junto**: `JOIN` + `WHERE` + `GROUP BY` + `HAVING` + `ORDER BY` + `LIMIT` |
+| Consulta | Recursos utilizados | O que faz |
+|----------|-------------------|-----------|
+| A | `INNER JOIN` | Lista pedidos com o nome do funcionário e do móvel |
+| B | `INNER JOIN` + `GROUP BY` + `COUNT`, `SUM`, `AVG` | Total de pedidos e unidades agrupados por móvel |
+| C | `INNER JOIN` + `GROUP BY` + `SUM` | Faturamento gerado por cada funcionário |
+| D | `WHERE` com múltiplos filtros | Móveis de MDF com preço acima de R$ 800 |
+| E | `INNER JOIN` + `GROUP BY` + `ORDER BY` + `LIMIT` | Top 3 móveis mais vendidos |
 
 ---
 
@@ -142,4 +135,4 @@ São 10 consultas organizadas por nível de complexidade:
 
 - Execute as consultas **uma por vez** para entender o resultado de cada uma.
 - Antes de rodar uma consulta com `JOIN`, tente primeiro fazer um `SELECT * FROM` em cada tabela separada para entender o que tem dentro.
-- A consulta **J** é a mais completa — ela combina todos os recursos de uma vez e é um ótimo exemplo de uma query real de produção.
+- A consulta **E** é a mais completa — ela combina `JOIN`, `GROUP BY`, `ORDER BY` e `LIMIT` em uma única query, um ótimo exemplo de como queries reais funcionam.
